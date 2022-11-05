@@ -29,7 +29,7 @@ $slotSymbols = [':)', 'X', 'O', '#', '%', '$'];
 
 
 
-$payedForSpin = 10;
+$payedForSpin = 1;
 $columnWin = 15;
 $rowsWin = 20;
 $epicWin = 100;
