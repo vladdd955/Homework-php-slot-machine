@@ -1,7 +1,6 @@
 <?php
 
 
-
 $board = [
    [" "," "," "," "],
    [" "," "," "," "],
@@ -29,16 +28,21 @@ $slotSymbols = [':)', 'X', 'O', '#', '%', '$'];
 
 
 
-$playerMoney  = 80;
-$payedForSpin = 3 * 4;
+
+$payedForSpin = 10;
 $columnWin = 15;
 $rowsWin = 20;
 $epicWin = 100;
 
+$cash = readline("How much money do you have. One try costs is {$payedForSpin} -> ");
 
 $userSelection =  readline("Press 1 if you want try to win something -> ");
 
 
+function userMoney($cash, $payedForSpin)
+{
+    return $cash - $payedForSpin;
+};
 
 //line nr. 1
 
@@ -70,7 +74,9 @@ $userSelection =  readline("Press 1 if you want try to win something -> ");
            echo "\n";
 
        }
+            echo "Current money -> " . $firstCount = userMoney($cash, $payedForSpin) . "\n";
 //line nr 2
+
        $userSelection = readline("Press 1 if you want try to win something -> ");
 
 
@@ -100,7 +106,9 @@ $userSelection =  readline("Press 1 if you want try to win something -> ");
            display($board);
            echo "\n";
            echo "\n";
+
        }
+        echo "Current money -> " . $secondCount = userMoney($firstCount, $payedForSpin) . "\n";
 //line nr 3
        $userSelection = readline("Press 1 if you want try to win something -> ");
        if ($userSelection == 1) {
@@ -130,6 +138,7 @@ $userSelection =  readline("Press 1 if you want try to win something -> ");
            echo "\n";
            echo "\n";
        }
+        echo "Current money -> " . $third = userMoney($secondCount, $payedForSpin) . "\n";
 //line nr. 4
        $userSelection = readline("Press 1 if you want try to win something -> ");
        if ($userSelection == 1) {
@@ -156,83 +165,78 @@ $userSelection =  readline("Press 1 if you want try to win something -> ");
 
            $board[2][3] = $chose;
            display($board);
-           echo "Your money after spin -> " . $mm = $playerMoney - $payedForSpin . "\n";
-
 
 }
+       echo "Current money -> " . $fourth = userMoney($third, $payedForSpin) . "\n";
 
 
         //Column combination.
 
-function columns($board, $playerMoney, $columnWin)
+function columns($board, $fourth, $columnWin)
 {
 
     if ($board[0][0] === $board[1][0] && $board[0][0] === $board[2][0] ) {
-        $resultColumn  = $playerMoney + $columnWin;
+        $resultColumn  = $fourth + $columnWin;
         echo  "You EARN in column line -> " . $columnWin . " In your wallet have -> ". $resultColumn . "\n";
     }
     if ($board[0][1] === $board[1][1] && $board[0][1] === $board[2][1] ) {
-        $resultColumn = $playerMoney + $columnWin;
+        $resultColumn = $fourth + $columnWin;
         echo  "You EARN in column line -> " . $columnWin . " In your wallet have -> ". $resultColumn . "\n";
     }
     if ($board[0][2] === $board[1][2] && $board[0][2] === $board[2][2] ) {
-        $resultColumn = $playerMoney + $columnWin;
+        $resultColumn = $fourth + $columnWin;
         echo  "You EARN in column line -> " . $columnWin . " In your wallet have -> ". $resultColumn . "\n";
     }
     if ($board[0][3] === $board[1][3] && $board[0][3] === $board[2][3] ) {
-        $resultColumn = $playerMoney + $columnWin;
+        $resultColumn = $fourth + $columnWin;
         echo  "You EARN in column line -> " . $columnWin . " In your wallet have -> ". $resultColumn . "\n";
     }
 
 }
-columns($board, $playerMoney, $columnWin);
+columns($board, $fourth, $columnWin);
 
         // rows combination.
 
-function rows($board, $playerMoney, $rowsWin)
+function rows($board, $fourth, $rowsWin)
 {
     if ($board[0][0] === $board[0][1] && $board[0][0] === $board[0][2] && $board[0][0] === $board[0][3] ) {
-        $resultRows  = $playerMoney + $rowsWin;
+        $resultRows  = $fourth + $rowsWin;
         echo  "You EARN in row line -> " . $rowsWin . " In your wallet have -> ". $resultRows . "\n";
     }
     if ($board[1][0] === $board[1][1] && $board[1][0] === $board[1][2] && $board[1][0] === $board[1][3] ) {
-        $resultRows = $playerMoney + $rowsWin;
+        $resultRows = $fourth + $rowsWin;
         echo  "You EARN in row line -> " . $rowsWin . " In your wallet have -> ". $resultRows . "\n";
     }
     if ($board[2][0] === $board[2][1] && $board[2][0] === $board[2][2] && $board[2][0] === $board[2][3] ) {
-        $resultRows = $playerMoney + $rowsWin;
+        $resultRows = $fourth + $rowsWin;
         echo  "You EARN in row line -> " . $rowsWin . " In your wallet have -> ". $resultRows . "\n";
     }
 
 
 }
-rows($board, $playerMoney, $rowsWin);
+rows($board, $fourth, $rowsWin);
 
         //epic combination.
 
-function epic($board, $playerMoney, $epicWin)
+function epic($board, $fourth, $epicWin)
 {
     if($board[0][0] === $board[1][0] && $board[0][0] === $board[2][1] && $board[0][0] === $board[2][2]) {
-        $resultEpic = $playerMoney + $epicWin;
+        $resultEpic = $fourth + $epicWin;
         echo  "You EARN in epic line -> " . $epicWin . " In your wallet have -> ". $resultEpic . "\n";
     }
     if($board[0][3] === $board[1][3] && $board[0][3] === $board[1][2] && $board[0][3] === $board[1][1]) {
-        $resultEpic = $playerMoney + $epicWin;
+        $resultEpic = $fourth + $epicWin;
         echo  "You EARN in epic line -> " . $epicWin . " In your wallet have -> ". $resultEpic . "\n";
     }
     if($board[2][0] === $board[2][1] && $board[2][0] === $board[1][2] && $board[2][0] === $board[0][3]) {
-        $resultEpic = $playerMoney + $epicWin;
+        $resultEpic = $fourth + $epicWin;
         echo  "You EARN in epic line -> " . $epicWin . " In your wallet have -> ". $resultEpic . "\n";
     }
     if($board[2][0] === $board[1][0] && $board[2][0] === $board[0][1] && $board[2][0] === $board[1][2] && $board[2][0] === $board[2][2]) {
-        $resultEpic = $playerMoney + $epicWin;
+        $resultEpic = $fourth + $epicWin;
         echo  "You EARN in epic line -> " . $epicWin . " In your wallet have -> ". $resultEpic . "\n";
     }
 
 }
-epic($board, $playerMoney, $epicWin);
-
-
-
-
+epic($board, $fourth, $epicWin);
 
