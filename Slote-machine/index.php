@@ -44,6 +44,11 @@ function userMoney($cash, $payedForSpin)
     return $cash - $payedForSpin;
 };
 
+if ($userSelection != 1) {
+    echo "invalid input";
+    exit;
+}
+
 //line nr. 1
 
        if ($userSelection == 1) {
